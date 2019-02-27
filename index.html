@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+  </head>
+  <body>
+
+    <div id="app">
+      {{ message }}
+    </div>
+
+    <div id="app-2">
+      <span v-bind:title="message">
+        Наведи курсор
+      </span>
+    </div>
+
+    <div id="app-3">
+      <span v-if="seen">Сейчас меня видно</span>
+    </div>
+
+    <div id="app-4">
+      <ol>
+        <li v-for="todo in todos">
+          {{ todo.text }}
+        </li>
+      </ol>
+    </div>
+
+    <div id="app-5">
+      <p>{{ message }}</p>
+      <button v-on:click="reverseMessage">Перевернуть сообщение</button>
+    </div>
+
+    <div id="app-6">
+      <p>{{ message }}</p>
+      <input v-model="message">
+    </div>
+
+    <div id="app-7">
+      <ol>
+        <todo-item
+          v-for="item in groceryList"
+          v-bind:todo="item"
+          v-bind:key="item.id"
+          ></todo-item>
+      </ol>
+    </div>
+
+    <div id="demo">
+      {{ fullName }}
+    </div>
+
+    <div id="watch-example">
+      <p>
+      Задайте вопрос на который можно ответить да или нет
+      </p>
+      <input v-model="question">
+      <p>{{ answer }}</p>
+    </div>
+
+    <div id="components-demo">
+      <button-counter></button-counter>
+    </div>
+
+    <div id="blog-post-demo">
+      <blog-post
+        v-for="post in posts"
+        v-bind:key="post.id"
+        v-bind:post="post"
+        ></blog-post>
+    </div>
+
+    <div id="blog-post-event-demo">
+      <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post v-for="post in posts"
+                   v-bind:key="post.id"
+                   v-bind:post="post"
+                   v-on:enlarge-text="postFontSize += $event">
+        <button v-on:click="$emit('enlarge-text', 0.1)">
+          Увеличить шрифт
+        </button>
+        </blog-post>
+      </div>
+    </div>
+
+    <ul id="example-1">
+      <li v-for="item in items">
+        {{ item.message }}
+      </li>
+    </ul>
+
+    <ul id="example-2">
+      <li v-for="(item, index) in items">
+        {{ parentMessage }} - {{ index }} - {{ item.message }}
+      </li>
+    </ul>
+
+    <ul id="v-for-object">
+      <li v-for="(value, key, index) in object">
+        {{ index }}. {{ key }}: {{ value }}
+      </li>
+    </ul>
+
+    <ul id="num">
+    <li v-for="n in evenNumbers">{{ n }}</li>
+    </ul>
+
+       <!-- mini TODO! --> 
+
+       <div id="todo-list-example">
+         <form v-on:submit.prevent="addNewTodo">
+           <label for="new-todo">Добавь задачу</label>
+           <input
+             v-model="newTodoText"
+             id="new-todo"
+             placeholder="Например, выучить Vue!"
+             >
+             <button>Добавить</button>
+         </form>
+         <ul>
+         <li
+           is="todo-item"
+           v-for="(todo, index) in todos"
+           v-bind:key="todo.id"
+           v-bind:title="todo.title"
+           v-on:remove="todos.splice(index, 1)"
+           ></li>
+         </ul>
+       </div>
+
+       <!-- ------------------------------------- -->
+
+    <script src="app.js"></script>
+  </body>
+</html>
