@@ -243,3 +243,254 @@ new Vue({
 });
 
 // ---------------------------------
+
+var example3 = new Vue({
+  el: "#example-3",
+  data: {
+    counter: 0
+  }
+});
+
+var example4 = new Vue({
+  el: "#example-4",
+  data: {
+    name: "BoorunDuck"
+  },
+  methods: {
+    greet: function(event) {
+      alert("Приветствую тебя, о Великий " + this.name + "!");
+      if (event) {
+        alert(event.target.tagName);
+      }
+    }
+  }
+});
+
+var example5 = new Vue({
+  el: "#example-5",
+  data: {
+    say: function(message) {
+      alert(message);
+    }
+  }
+});
+
+var example6 = new Vue({
+  el: "#example-6",
+  data: {
+    message: ""
+  }
+});
+
+var example7 = new Vue({
+  el: "#example-7",
+  data: {
+    message: ""
+  }
+});
+
+var example8 = new Vue({
+  el: "#example-8",
+  data: {
+    checkedNames: []
+  }
+});
+
+var example9 = new Vue({
+  el: "#example-9",
+  data: {
+    picked: ""
+  }
+});
+
+var example10 = new Vue({
+  el: "#example-10",
+  data: {
+    selected: ""
+  }
+});
+
+var example11 = new Vue({
+  el: "#example-11",
+  data: {
+    selected: []
+  }
+});
+
+var example12 = new Vue({
+  el: "#example-12",
+  data: {
+    selected: "",
+    options: [
+      { text: "Налево", value: "Коня потеряешь" },
+      { text: "Направо", value: "Жизнь потеряешь" },
+      { text: "Прямо", value: "Все будет ОК!" }
+    ]
+  }
+});
+
+var demo1 = new Vue({
+  el: "#demo-1",
+  data: {
+    show: true
+  }
+});
+
+var example13 = new Vue({
+  el: "#example-13",
+  data: {
+    show: true
+  }
+});
+
+var example14 = new Vue({
+  el: "#example-14",
+  data: {
+    show: true
+  }
+});
+
+var example15 = new Vue({
+  el: "#example-15",
+  data: {
+    show: true
+  }
+});
+
+var example16 = new Vue({
+  el: "#example-16",
+  data: {
+    show: false
+  },
+  methods: {
+    beforeEnter: function(el) {
+      el.style.opacity = 0;
+    },
+    enter: function(el, done) {
+      Velocity(el, { opacity: 1, fontSize: "1.4em" }, { duration: 300 });
+      Velocity(el, { fontSize: "1em" }, { complete: done });
+    },
+    leave: function(el, done) {
+      Velocity(el, { translateX: "15px", rotateZ: "50deg" }, { duration: 600 });
+      Velocity(el, { rotateZ: "100deg" }, { loop: 2 });
+      Velocity(
+        el,
+        {
+          rotateZ: "45deg",
+          translateY: "30px",
+          translateX: "30px",
+          opacity: 0
+        },
+        { complete: done }
+      );
+    }
+  }
+});
+
+var example17 = new Vue({
+  el: "#example-17",
+  data: {
+    view: "v-a"
+  },
+  components: {
+    "v-a": {
+      template: "<div>Humster</div>"
+    },
+    "v-b": {
+      template: "<div>BoorunDuck</div>"
+    }
+  }
+});
+
+new Vue({
+  el: "#list-demo",
+  data: {
+    items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    nextNum: 10
+  },
+  methods: {
+    randomIndex: function() {
+      return Math.floor(Math.random() * this.items.length);
+    },
+    add: function() {
+      this.items.splice(this.randomIndex(), 0, this.nextNum++);
+    },
+    remove: function() {
+      this.items.splice(this.randomIndex(), 1);
+    }
+  }
+});
+
+new Vue({
+  el: "#flip-list-demo",
+  data: {
+    items: [1, 2, 3, 4, 5, 6, 7, 8, 9]
+  },
+  methods: {
+    shuffle: function() {
+      this.items = _.shuffle(this.items);
+    }
+  }
+});
+
+new Vue({
+  el: "#list-complete-demo",
+  data: {
+    items: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    nextNum: 10
+  },
+  methods: {
+    randomIndex: function() {
+      return Math.floor(Math.random() * this.items.length);
+    },
+    add: function() {
+      this.items.splice(this.randomIndex(), 0, this.nextNum++);
+    },
+    remove: function() {
+      this.items.splice(this.randomIndex(), 1);
+    },
+    shuffle: function() {
+      this.items = _.shuffle(this.items);
+    }
+  }
+});
+
+new Vue({
+  el: "#staggered-list-demo",
+  data: {
+    query: "",
+    list: [
+      { msg: "Капитан Америка" },
+      { msg: "Железный человек" },
+      { msg: "Халк" },
+      { msg: "Человек паук" },
+      { msg: "Тор" }
+    ]
+  },
+  computed: {
+    computedList: function() {
+      var vm = this;
+      return this.list.filter(function(item) {
+        return item.msg.toLowerCase().indexOf(vm.query.toLowerCase()) !== -1;
+      });
+    }
+  },
+  methods: {
+    beforeEnter: function(el) {
+      el.style.opacity = 0;
+      el.style.height = 0;
+    },
+    enter: function(el, done) {
+      var delay = el.dataset.index * 150;
+      setTimeout(function() {
+        Velocity(el, { opacity: 1, height: "1.6em" }, { complete: done });
+      }, delay);
+    },
+    leave: function(el, done) {
+      var delay = el.dataset.index * 150;
+      setTimeout(function() {
+        Velocity(el, { opacity: 0, height: 0 }, { complete: done });
+      }, delay);
+    }
+  }
+});
